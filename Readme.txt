@@ -3,23 +3,27 @@
 In your shell after installing PySpark first import packages:
 Go to your python shell & execute the following in terminal
 
-pip install findspark
+#pip install findspark
 
-import findspark
-findspark.init()
+#import findspark
+#findspark.init()
 
 (import the necessary modules)
 
-from pyspark import SparkContext
-from pyspark import SparkConf
+#from pyspark.sql import SparkSession
+spark = SparkSession.builder.master("local[1]").appName("SparkByExamples.com").getOrCreate()
+
+**To set PySpark environment variables, first, 
+get the PySpark installation direction path by running the Python command
+
+ #pip show pyspark
+
+Now set the SPARK_HOME & PYTHONPATH according to your installation
+
+export SPARK_HOME=/Users/prabha/apps/spark-2.4.0-bin-hadoop2.7
+export PYTHONPATH=$SPARK_HOME/python:$SPARK_HOME/python/build:$PYTHONPATH
+
 
 Done!!
 
 
-For a Spark execution in pyspark two components are required to work together:
-
-pyspark python package
-Spark instance in a JVM
-
-When launching things with spark-submit or pyspark, these scripts will take care of both, i.e. they set up your PYTHONPATH, PATH, etc,
-so that your script can find pyspark, and they also start the spark instance, configuring according to your params, e.g. --master X
